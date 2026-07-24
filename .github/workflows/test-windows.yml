@@ -13,7 +13,7 @@ concurrency:
 env:
   FW_VERSION: "9.3.9.1"
   FW_BUILD: "1439"
-  FW_CODE_DIR: "C:\\Program Files\\SIL\\FieldWorks 9"
+  FW_CODE_DIR: "C:\\Program Files\\FieldWorks9"
   FW_PROJECTS_DIR: "C:\\ProgramData\\SIL\\FieldWorks\\Projects"
   FW_INSTALLER_DIR: "C:\\fw-ci\\installer"
   FW_SAMPLE_DIR: "C:\\fw-ci\\samples"

@@ -8,7 +8,7 @@ param(
     [string]$Version = "9.3.9.1",
     [string]$Build = "1439",
     [string]$InstallerUrl = "",
-    [string]$CodeDir = "C:\Program Files\SIL\FieldWorks 9",
+    [string]$CodeDir = "C:\Program Files\FieldWorks9",
     [string]$ProjectsDir = "C:\ProgramData\SIL\FieldWorks\Projects",
     [string]$DownloadDir = "C:\fw-ci\installer",
     [string]$InstallLog = "C:\fw-ci\fw-install.log",
@@ -54,6 +54,7 @@ function Find-FieldWorksCodeDir {
     }
 
     $searchRoots = @(
+        "C:\Program Files\FieldWorks9",
         "C:\Program Files\SIL",
         "C:\Program Files (x86)\SIL",
         "C:\Program Files",
