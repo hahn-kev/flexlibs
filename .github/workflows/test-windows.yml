@@ -49,10 +49,8 @@ jobs:
             ${{ env.FW_INSTALLER_DIR }}
             ${{ env.FW_SAMPLE_DIR }}
             C:\ProgramData\SIL\FieldWorks
-            C:\fw-ci\FieldWorks
-            C:\fw-ci\builddir
             C:\fw-ci\fw-code-dir.txt
-          key: fw-${{ env.FW_VERSION }}-${{ env.FW_BUILD }}-win-x64-v2
+          key: fw-${{ env.FW_VERSION }}-${{ env.FW_BUILD }}-win-x64-v3
 
       - name: Install FieldWorks (or refresh registry after cache restore)
         shell: pwsh
