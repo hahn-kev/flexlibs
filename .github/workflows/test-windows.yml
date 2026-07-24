@@ -49,7 +49,10 @@ jobs:
             ${{ env.FW_INSTALLER_DIR }}
             ${{ env.FW_SAMPLE_DIR }}
             C:\ProgramData\SIL\FieldWorks
-          key: fw-${{ env.FW_VERSION }}-${{ env.FW_BUILD }}-win-x64-v1
+            C:\fw-ci\FieldWorks
+            C:\fw-ci\builddir
+            C:\fw-ci\fw-code-dir.txt
+          key: fw-${{ env.FW_VERSION }}-${{ env.FW_BUILD }}-win-x64-v2
 
       - name: Install FieldWorks (or refresh registry after cache restore)
         shell: pwsh
@@ -60,6 +63,16 @@ jobs:
             -CodeDir $env:FW_CODE_DIR `
             -ProjectsDir $env:FW_PROJECTS_DIR `
             -DownloadDir $env:FW_INSTALLER_DIR
+
+      - name: Upload FieldWorks install logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fw-install-logs
+          path: |
+            C:\fw-ci\fw-install*.log
+            C:\fw-ci\fw-code-dir.txt
+          if-no-files-found: ignore
 
       - name: Set up sample FieldWorks project
         shell: pwsh
@@ -81,4 +94,8 @@ jobs:
           FLEXLIBS_FW_CODE_DIR: ${{ env.FW_CODE_DIR }}
           FLEXLIBS_FW_PROJECTS_DIR: ${{ env.FW_PROJECTS_DIR }}
         run: |
+          if exist C:\fw-ci\fw-code-dir.txt (
+            set /p FLEXLIBS_FW_CODE_DIR=<C:\fw-ci\fw-code-dir.txt
+          )
+          echo FLEXLIBS_FW_CODE_DIR=%FLEXLIBS_FW_CODE_DIR%
           call make.bat test-nuget -k "not CustomFields" -q
